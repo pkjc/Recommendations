@@ -13,7 +13,8 @@ import com.mysql.jdbc.Driver;
 public class DatabaseUtil {
 
 	private static Connection connection = null;
-
+	private int i;
+	
 	public static Connection getConnection() {
 		if (connection != null)
 			return connection;
