@@ -7,6 +7,13 @@ public class Patient {
 	private String email;
 	private String password;
 	
+	public Patient(String fName, String lName, String email, String password) {
+		super();
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.password = password;
+	}
 	public int getID() {
 		return ID;
 	}

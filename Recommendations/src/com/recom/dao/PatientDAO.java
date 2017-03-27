@@ -15,7 +15,7 @@ public class PatientDAO {
 		connection = DatabaseUtil.getConnection();
 	}
 
-	public void addPateint(Patient patient) {
+	public void addPatient(Patient patient) {
 		String sql = "insert into patient(email_address) values (?)";
 
 		try {
