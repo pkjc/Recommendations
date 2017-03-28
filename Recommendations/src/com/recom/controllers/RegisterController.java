@@ -43,13 +43,15 @@ public class RegisterController extends HttpServlet {
         String isDoctor = request.getParameter("isDoctor");
         
         patient = new Patient(fName, lName, email, password);
-        doctor = new Doctor(fName, lName, email, password);
 		
-		if(isDoctor.equals("true")){
-			registerService.registerDoctor(doctor);
-		}else
+		if(isDoctor != null && !isDoctor.isEmpty()){
+			doctor = new Doctor(fName, lName, email, password);
+			//registerService.registerDoctor(doctor);
+		}else{
+			System.out.println("You Entered : "+fName + lName + email + password);
 			registerService.registerPatient(patient);
-		
+		}
+		request.setAttribute("fname", request.getParameter("fName"));
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dashboard.jsp");
 		requestDispatcher.forward(request, response);
 	}
