@@ -17,7 +17,7 @@ public class RegisterService {
 	public boolean registerDoctor(Doctor doctor) {
 		
 		DoctorDAO doctorDAO = new DoctorDAO();
-		//doctorDAO.addDoctor(doctor);
+		doctorDAO.addDoctor(doctor);
 		
 		return true;
 	}

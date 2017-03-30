@@ -15,13 +15,18 @@ public class DoctorDAO {
 	}
 
 	public void addDoctor(Doctor doctor) {
-		String sql = "insert into doctor(email_address) values (?)";
+		String sql = "insert into doctor(fname, lname, email, password) values (?, ?, ?, ?)";
 
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			//preparedStatement.setString(1, patient.getEmail_address());
+			preparedStatement.setString(1, doctor.getfName());
+			preparedStatement.setString(2, doctor.getlName());
+			preparedStatement.setString(3, doctor.getEmail());
+			preparedStatement.setString(4, doctor.getPassword());
+
 			int added = preparedStatement.executeUpdate();
-			System.out.println("Doctor Added!" + added);
+
+			System.out.println("User Added!" + added);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
