@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.recom.model.Doctor;
 import com.recom.model.Patient;
+import com.recom.services.LoginService;
 import com.recom.services.RegisterService;
 
 /**
@@ -35,7 +36,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		RegisterService registerService = new RegisterService();
+		LoginService loginService = new LoginService();
 		Patient patient;
 		Doctor doctor;
 		HttpSession session = request.getSession();
@@ -48,12 +49,12 @@ public class LoginController extends HttpServlet {
 		
 		if(isDoctor != null && !isDoctor.isEmpty()){
 			doctor = new Doctor("", "", email, password);
-			registerService.registerDoctor(doctor);
+			//loginService.registerDoctor(doctor);
+			//session.setAttribute("doctor", doctor);
 		}else{
-			registerService.registerPatient(patient);
+			patient = loginService.LoginPatient(patient);
+			session.setAttribute("patient", patient);
 		}
-		
-        session.setAttribute("patient", patient);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dashboard.jsp");
 		requestDispatcher.forward(request, response);
