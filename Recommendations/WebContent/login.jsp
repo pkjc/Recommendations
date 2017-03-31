@@ -100,7 +100,7 @@ h1 {
 						<label for="password" class="col-md-3 control-label">Password</label>
 						<div class="col-md-9">
 							<input type="password" class="form-control" id="password"
-								name="password" placeholder="Choose a Password">
+								name="password" placeholder="Enter your password">
 						</div>
 					</div>
 					<div class="form-group">
