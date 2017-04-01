@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,24 +41,38 @@ public class LoginController extends HttpServlet {
 		Patient patient;
 		Doctor doctor;
 		HttpSession session = request.getSession();
-	
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String isDoctor = request.getParameter("isDoctor");
-        
-        patient = new Patient("", "", email, password);
-		
+		RequestDispatcher requestDispatcher = null;
+
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String isDoctor = request.getParameter("isDoctor");
+
+		patient = new Patient("", "", email, password);
+		doctor = new Doctor("", "", email, password);
+
 		if(isDoctor != null && !isDoctor.isEmpty()){
-			doctor = new Doctor("", "", email, password);
-			//loginService.registerDoctor(doctor);
-			//session.setAttribute("doctor", doctor);
+			/*patient = loginService.LoginPatient(patient);
+			session.setAttribute("patient", patient);
+			
+			if(patient.getID()==0){
+				requestDispatcher = request.getRequestDispatcher("/login.jsp");
+			}else{
+				requestDispatcher = request.getRequestDispatcher("/dashboard.jsp");
+			}*/
 		}else{
 			patient = loginService.LoginPatient(patient);
 			session.setAttribute("patient", patient);
+			System.out.println("patient.getID() " + patient.getID());
+			if(patient.getID()==0){
+				requestDispatcher = request.getRequestDispatcher("/login.jsp");
+			}else{
+				Cookie loginCookie = new Cookie("userID", patient.getID() + "");
+				//setting cookie to expiry in 30 mins
+				loginCookie.setMaxAge(30*60);
+				response.addCookie(loginCookie);
+				requestDispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
+			}
 		}
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dashboard.jsp");
 		requestDispatcher.forward(request, response);
 	}
-
 }

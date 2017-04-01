@@ -47,7 +47,7 @@ public class PatientDAO {
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			System.out.println("ResultSet : " + resultSet);
+			//System.out.println("ResultSet Next : " + resultSet.next());
 			
 			while(resultSet.next()) {
                 patient.setID(resultSet.getInt("id"));
