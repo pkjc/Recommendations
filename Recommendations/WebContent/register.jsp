@@ -75,7 +75,7 @@ h1 {
 			<div class="col-md-8" role="navigation">
 				<h1>Create an Account</h1>
 				
-				<form class="form-horizontal" action="register" method="post">
+				<form class="form-horizontal" action=register method="post">
 					<div class="form-group">
 						<label for="firstName" class="col-md-3 control-label">First
 							Name</label>

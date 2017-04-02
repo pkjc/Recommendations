@@ -6,6 +6,7 @@ public class Patient {
 	private String lName;
 	private String email;
 	private String password;
+	private int testsTaken;
 	
 	public Patient(String fName, String lName, String email, String password) {
 		super();
