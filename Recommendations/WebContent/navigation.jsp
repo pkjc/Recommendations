@@ -8,7 +8,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Project name</a>
+			<a class="navbar-brand" href="#">Project 337</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -17,10 +17,9 @@
 				<li><a href="#contact">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../navbar/">Default</a></li>
-				<li class="active"><a href="./">Static top <span
-						class="sr-only">(current)</span></a></li>
-				<li><a href="../navbar-fixed-top/">Fixed top</a></li>
+				<li><a href="register">Register</a></li>
+				<li class=""><a href="login">Login</a></li>
+				<li><a href="logout">Logout</a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

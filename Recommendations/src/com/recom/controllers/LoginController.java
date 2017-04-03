@@ -40,7 +40,6 @@ public class LoginController extends HttpServlet {
 		Patient patient;
 		Doctor doctor;
 		HttpSession session = request.getSession();
-		RequestDispatcher requestDispatcher = null;
 		Cookie loginCookie;
 		
 		String email = request.getParameter("email");
@@ -64,15 +63,15 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("patient", patient);
 			System.out.println("patient.getID() " + patient.getID());
 			if(patient.getID()==0){
-				requestDispatcher = request.getRequestDispatcher("/login.jsp");
+				boolean invUser = true;
+				request.setAttribute("InvUser", "true");
+				request.getRequestDispatcher("/login.jsp").include(request, response);
 			}else{
-				loginCookie = new Cookie("userID", patient.getID() + "");
-				loginCookie.setMaxAge(30*60);
-				System.out.println("Login cookie " + loginCookie.getName());
+				loginCookie = new Cookie("patID", patient.getID() + "");
+				loginCookie.setMaxAge(60*60*24*365);
 				response.addCookie(loginCookie);
-				requestDispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
+				request.getRequestDispatcher("/dashboard.jsp").include(request, response);
 			}
 		}
-		requestDispatcher.forward(request, response);
 	}
 }

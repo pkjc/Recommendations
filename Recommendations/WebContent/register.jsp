@@ -1,32 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<!-- Bootstrap core CSS -->
-<link href="./assets/bootstrap2.min.css" rel="stylesheet">
-<script src="./assets/ie-emulation-modes-warning.js"></script>
-<link href="./assets/offcanvas.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-.btn {
-	padding: 8px 25px;
-}
-
-body {
-	padding-top: 0;
-}
-
-.form-control {
-	
-}
-
-h1 {
-	margin-bottom: 40px;
-	line-height: 115%;
-}
-</style>
-<title>Create an Account</title>
-</head>
+<jsp:include page="head.jsp" />
 <body>
 	<jsp:include page="navigation.jsp" />
 	<div class="container">
