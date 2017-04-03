@@ -48,6 +48,7 @@ h1 {
 				if (cookie.getName().equals("userID"))
 					System.out.println("IN");
 					userID = cookie.getValue();
+					break;
 			}
 		}
 		System.out.println("userID " + userID);

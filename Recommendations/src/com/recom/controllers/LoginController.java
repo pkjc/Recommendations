@@ -41,7 +41,8 @@ public class LoginController extends HttpServlet {
 		Doctor doctor;
 		HttpSession session = request.getSession();
 		RequestDispatcher requestDispatcher = null;
-
+		Cookie loginCookie;
+		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String isDoctor = request.getParameter("isDoctor");
@@ -65,7 +66,7 @@ public class LoginController extends HttpServlet {
 			if(patient.getID()==0){
 				requestDispatcher = request.getRequestDispatcher("/login.jsp");
 			}else{
-				Cookie loginCookie = new Cookie("userID", patient.getID() + "");
+				loginCookie = new Cookie("userID", patient.getID() + "");
 				loginCookie.setMaxAge(30*60);
 				System.out.println("Login cookie " + loginCookie.getName());
 				response.addCookie(loginCookie);
