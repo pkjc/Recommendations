@@ -46,6 +46,7 @@ h1 {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("userID"))
+					System.out.println("IN");
 					userID = cookie.getValue();
 			}
 		}

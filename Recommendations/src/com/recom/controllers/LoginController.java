@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
+		response.sendRedirect("login.jsp");
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class LoginController extends HttpServlet {
 				requestDispatcher = request.getRequestDispatcher("/login.jsp");
 			}else{
 				Cookie loginCookie = new Cookie("userID", patient.getID() + "");
-				//setting cookie to expiry in 30 mins
 				loginCookie.setMaxAge(30*60);
+				System.out.println("Login cookie " + loginCookie.getName());
 				response.addCookie(loginCookie);
 				requestDispatcher = getServletContext().getRequestDispatcher("/dashboard.jsp");
 			}
