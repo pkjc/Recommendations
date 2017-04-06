@@ -11,15 +11,16 @@
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if ((cookie.getName().equals("patID")) || (cookie.getName().equals("docID"))){
+				if ((cookie.getName().equals("patID")) || (cookie.getName().equals("docID"))) {
 					System.out.println("found cookie \n");
 					userID = cookie.getValue();
 					break;
 				}
 			}
 		}
-		if (userID == null){
-			response.sendRedirect("login.jsp");
+		if (userID == null) {
+			request.setAttribute("PlsLogin", true);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	%>
 	<jsp:include page="navigation.jsp" />
@@ -27,10 +28,14 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="navigation">
-			
 				<h1>
 					Hello,
-					<c:out value="${patient.fName}" />
+					<c:if test="${not empty patient.fName}">
+						<c:out value="${patient.fName}" />
+					</c:if>
+					<c:if test="${not empty doctor.fName}">
+						<c:out value="${doctor.fName}" />
+					</c:if>
 				</h1>
 			</div>
 			<div class="col-md-2"></div>

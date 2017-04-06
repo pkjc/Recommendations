@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -17,9 +20,15 @@
 				<li><a href="#contact">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="register">Register</a></li>
-				<li class=""><a href="login">Login</a></li>
-				<li><a href="logout">Logout</a></li>
+				<c:if test="${empty patient.fName && empty doctor.fName}">
+					<li><a href="register">Register</a></li>
+				</c:if>
+				<c:if test="${empty patient.fName && empty doctor.fName}">
+					<li class=""><a href="login">Login</a></li>
+				</c:if>
+				<c:if test="${not empty patient.fName || not empty doctor.fName}">
+					<li><a href="logout">Logout</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

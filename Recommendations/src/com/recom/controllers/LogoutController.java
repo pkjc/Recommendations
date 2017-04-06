@@ -29,11 +29,18 @@ public class LogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		Cookie loginCookie = new Cookie("patID", "");
-		loginCookie.setMaxAge(0);
-		response.addCookie(loginCookie);
+		Cookie patCookie = new Cookie("patID", "");
+		Cookie docCookie = new Cookie("docID", "");
+		
+		patCookie.setMaxAge(0);
+		docCookie.setMaxAge(0);
+		
+		response.addCookie(patCookie);
+		response.addCookie(docCookie);
+		
 		request.getSession().invalidate();
-		request.setAttribute("logout", "true");
+		request.setAttribute("logout", true);
+		
 		getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);;
 	}
 

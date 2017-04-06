@@ -10,27 +10,25 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="navigation">
-	<%
-        if ("true".equals(request.getAttribute("InvalidUser"))) {
-    %>
-       <div class="alert alert-danger" role="alert">Email or Password you entered was incorrect. 
-				Please try again.</div>
-    <%
-        }
-    %>
-				
-	<%
-        if ("true".equals(request.getAttribute("logout"))) {
-    %>
-       <div class="alert alert-info" role="alert">You were successfully logged out.</div>
-    <%
-        }
-    %>
-			
+				<c:if test="${InvalidUser}">
+					<div class="alert alert-danger" role="alert">
+						Email or Password you entered was incorrect. Please try again.
+					</div>
+				</c:if>
+				<c:if test="${logout}">
+					<div class="alert alert-info" role="alert">
+						You were successfully logged out.
+					</div>
+				</c:if>
+				<c:if test="${PlsLogin}">
+					<div class="alert alert-info" role="alert">
+						Please login to continue.
+					</div>
+				</c:if>
 				<h1>Login</h1>
-				
+
 				<form class="form-horizontal" action="login" method="post">
-					
+
 					<div class="form-group">
 						<label for="emailAddress" class="col-md-3 control-label">Email</label>
 						<div class="col-md-9">
@@ -46,7 +44,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="isDoctorChkBox" class="col-md-3 control-label">Are you a Doctor?</label>
+						<label for="isDoctorChkBox" class="col-md-3 control-label">Are
+							you a Doctor?</label>
 						<div class="col-md-9">
 							<input type="checkbox" class="form-control" id="isDoctor"
 								name="isDoctor" placeholder="">

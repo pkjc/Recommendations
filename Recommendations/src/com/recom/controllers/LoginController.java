@@ -46,28 +46,31 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		String isDoctor = request.getParameter("isDoctor");
 		
-		System.out.println("isDoctor : " + isDoctor);
-		
 		if(isDoctor != null && !isDoctor.isEmpty()){
 			System.out.println("In Doc Login");
 			doctor = new Doctor("", "", email, password);
 			doctor = loginService.LoginDoctor(doctor);
 			session.setAttribute("doctor", doctor);
+			
 			System.out.println("doctor.getID() " + doctor.getID());
+			
 			if(doctor.getID()==0){
-				request.setAttribute("InvalidUser", "true");
+				request.setAttribute("InvalidUser", true);
 				request.getRequestDispatcher("/login.jsp").include(request, response);
 			}else{
 				loginCookie = new Cookie("docID", doctor.getID() + "");
 				loginCookie.setMaxAge(60*60*24*365);
 				response.addCookie(loginCookie);
-				request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				//request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				response.sendRedirect("dashboard.jsp");
 			}
 		}else{
 			patient = new Patient("", "", email, password);
 			patient = loginService.LoginPatient(patient);
 			session.setAttribute("patient", patient);
+			
 			System.out.println("patient.getID() " + patient.getID());
+			
 			if(patient.getID()==0){
 				request.setAttribute("InvalidUser", "true");
 				request.getRequestDispatcher("/login.jsp").include(request, response);
@@ -75,7 +78,8 @@ public class LoginController extends HttpServlet {
 				loginCookie = new Cookie("patID", patient.getID() + "");
 				loginCookie.setMaxAge(60*60*24*365);
 				response.addCookie(loginCookie);
-				request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				//request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				response.sendRedirect("dashboard.jsp");
 			}
 		}
 	}
