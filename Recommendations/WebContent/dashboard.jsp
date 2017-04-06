@@ -11,7 +11,7 @@
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("patID")){
+				if ((cookie.getName().equals("patID")) || (cookie.getName().equals("docID"))){
 					System.out.println("found cookie \n");
 					userID = cookie.getValue();
 					break;

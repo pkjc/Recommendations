@@ -45,7 +45,7 @@
 						<label for="isDoctorChkBox" class="col-md-3 control-label">Are
 							you a Doctor?</label>
 						<div class="col-md-9">
-							<input type="checkbox" value="" class="form-control"
+							<input type="checkbox" class="form-control"
 								id="isDoctor" name="isDoctor" placeholder="">
 						</div>
 					</div>

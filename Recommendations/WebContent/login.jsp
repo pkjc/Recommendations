@@ -11,7 +11,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="navigation">
 	<%
-        if ("true".equals(request.getAttribute("InvUser"))) {
+        if ("true".equals(request.getAttribute("InvalidUser"))) {
     %>
        <div class="alert alert-danger" role="alert">Email or Password you entered was incorrect. 
 				Please try again.</div>
@@ -48,7 +48,7 @@
 					<div class="form-group">
 						<label for="isDoctorChkBox" class="col-md-3 control-label">Are you a Doctor?</label>
 						<div class="col-md-9">
-							<input type="checkbox" value="" class="form-control" id="isDoctor"
+							<input type="checkbox" class="form-control" id="isDoctor"
 								name="isDoctor" placeholder="">
 						</div>
 					</div>

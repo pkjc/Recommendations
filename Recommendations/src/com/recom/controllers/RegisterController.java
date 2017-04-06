@@ -41,14 +41,14 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String isDoctor = request.getParameter("isDoctor");
-        
-        patient = new Patient(fName, lName, email, password);
 		
 		if(isDoctor != null && !isDoctor.isEmpty()){
+			System.out.println();
 			doctor = new Doctor(fName, lName, email, password);
 			registerService.registerDoctor(doctor);
 		}else{
-			System.out.println("You Entered : "+fName + lName + email + password);
+			System.out.println("You Entered : "+ fName + " " + lName + " " + email + " " + password);
+			patient = new Patient(fName, lName, email, password);
 			registerService.registerPatient(patient);
 		}
 		request.setAttribute("newReg", request.getParameter("newReg"));
