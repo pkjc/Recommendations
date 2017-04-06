@@ -46,24 +46,25 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		String isDoctor = request.getParameter("isDoctor");
 
-		patient = new Patient("", "", email, password);
-		doctor = new Doctor("", "", email, password);
-
 		if(isDoctor != null && !isDoctor.isEmpty()){
-			/*patient = loginService.LoginPatient(patient);
-			session.setAttribute("patient", patient);
-			
-			if(patient.getID()==0){
-				requestDispatcher = request.getRequestDispatcher("/login.jsp");
+			doctor = new Doctor("", "", email, password);
+			doctor = loginService.LoginDoctor(doctor);
+			session.setAttribute("doctor", doctor);
+			if(doctor.getID()==0){
+				request.setAttribute("InvUser", "true");
+				request.getRequestDispatcher("/login.jsp").include(request, response);
 			}else{
-				requestDispatcher = request.getRequestDispatcher("/dashboard.jsp");
-			}*/
+				loginCookie = new Cookie("docID", doctor.getID() + "");
+				loginCookie.setMaxAge(60*60*24*365);
+				response.addCookie(loginCookie);
+				request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+			}
 		}else{
+			patient = new Patient("", "", email, password);
 			patient = loginService.LoginPatient(patient);
 			session.setAttribute("patient", patient);
 			System.out.println("patient.getID() " + patient.getID());
 			if(patient.getID()==0){
-				boolean invUser = true;
 				request.setAttribute("InvUser", "true");
 				request.getRequestDispatcher("/login.jsp").include(request, response);
 			}else{

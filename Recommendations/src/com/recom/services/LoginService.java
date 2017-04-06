@@ -14,12 +14,12 @@ public class LoginService {
 		
 		return patient;
 	}
-	public boolean LoginDoctor(Doctor doctor) {
+	public Doctor LoginDoctor(Doctor doctor) {
 		
 		DoctorDAO doctorDAO = new DoctorDAO();
-		doctorDAO.addDoctor(doctor);
+		doctor = doctorDAO.validateDoctor(doctor);
 		
-		return true;
+		return doctor;
 	}
 
 }
