@@ -40,8 +40,9 @@ public class LogoutController extends HttpServlet {
 		
 		request.getSession().invalidate();
 		request.setAttribute("logout", true);
-		
-		getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);;
+		request.getSession().setAttribute("logout", true);
+
+		response.sendRedirect("login.jsp");
 	}
 
 	/**

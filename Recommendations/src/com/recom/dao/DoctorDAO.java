@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.recom.model.Doctor;
 import com.recom.model.Patient;
@@ -92,7 +94,33 @@ public class DoctorDAO {
 	}
 
 	public void updateDcotor(){}
-	public void getAllDoctors(){}
+	public List<Doctor> getAllDoctors(){
+		String sql = "select * from doctor";
+		List<Doctor> doctorsFromDB = new ArrayList<>();
+		Doctor doctorFromDB = new Doctor();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				doctorFromDB.setID(resultSet.getInt("id"));
+				doctorFromDB.setfName(resultSet.getString("fname"));
+				doctorFromDB.setlName(resultSet.getString("lname"));
+				doctorFromDB.setEmail(resultSet.getString("email"));    
+				
+				doctorsFromDB.add(doctorFromDB);               
+			}
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return doctorsFromDB;
+	}
 	public void getDoctorByID(){}
 	public void deleteDoctor(){}
 }

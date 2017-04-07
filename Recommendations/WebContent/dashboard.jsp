@@ -1,33 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.recom.utils.CookieChecker" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
 <body>
-	<%
-		String userID = null;
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if ((cookie.getName().equals("patID")) || (cookie.getName().equals("docID"))) {
-					System.out.println("found cookie \n");
-					userID = cookie.getValue();
-					break;
-				}
-			}
-		}
-		if (userID == null) {
-			request.setAttribute("PlsLogin", true);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
-	%>
+<%
+	boolean cookieFound = new CookieChecker().checkCookie(request);
+	System.out.println("#### dash \n" + cookieFound);
+	if (cookieFound) {
+		//cookie was found so do nothing and let the user see his dashboard
+	} else {
+		session.setAttribute("PlsLogin", true);
+		response.sendRedirect("login.jsp");
+	}
+%>
 	<jsp:include page="navigation.jsp" />
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8" role="navigation">
+			<div class="col-md-8" role="">
+				<c:if test="${loggedIn}">
+					<div class="alert alert-info alert-dismissable" role="alert">
+						You're already logged in.
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					</div>
+				</c:if>
 				<h1>
 					Hello,
 					<c:if test="${not empty patient.fName}">
@@ -35,10 +35,48 @@
 					</c:if>
 					<c:if test="${not empty doctor.fName}">
 						<c:out value="${doctor.fName}" />
-						<c:out value="${doctor.email}" />
-						<c:out value="${doctor.password}" />
 					</c:if>
 				</h1>
+				<hr>
+				<h4>Recent Tests</h4>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Date</th>
+							<th>Results</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="doc" items="${docList}">
+						<tr>
+							<th scope="row">${doc.ID}</th>
+							<td>${doc.fName}</td>
+							<td>${doc.lName}</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+				
+				<h4>Latest Appointments</h4>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Doctor</th>
+							<th>Appointment Date</th>
+							<th>Booked On</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Mark</td>
+							<td>Mark</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

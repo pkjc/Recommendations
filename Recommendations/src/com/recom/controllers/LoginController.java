@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.recom.dao.DoctorDAO;
 import com.recom.model.Doctor;
 import com.recom.model.Patient;
 import com.recom.services.LoginService;
@@ -37,52 +38,65 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		LoginService loginService = new LoginService();
-		Patient patient;
-		Doctor doctor;
-		HttpSession session = request.getSession();
-		Cookie loginCookie;
-		
+	
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String isDoctor = request.getParameter("isDoctor");
-		
+
 		if(isDoctor != null && !isDoctor.isEmpty()){
-			System.out.println("In Doc Login");
-			doctor = new Doctor("", "", email, password);
-			doctor = loginService.LoginDoctor(doctor);
-			
-			session.setAttribute("doctor", doctor);
-			
-			System.out.println("doctor.getID() " + doctor.getID());
-			
-			if(doctor.getID()==0){
-				request.setAttribute("InvalidUser", true);
-				request.getRequestDispatcher("/login.jsp").include(request, response);
-			}else{
-				loginCookie = new Cookie("docID", doctor.getID() + "");
-				loginCookie.setMaxAge(60*60*24*365);
-				response.addCookie(loginCookie);
-				
-				response.sendRedirect("dashboard.jsp");
-			}
+			handleDocValidation(request, response, loginService, email, password);
 		}else{
-			patient = new Patient("", "", email, password);
-			patient = loginService.LoginPatient(patient);
-			
-			session.setAttribute("patient", patient);
-			
-			System.out.println("patient.getID() " + patient.getID());
-			
-			if(patient.getID()==0){
-				request.setAttribute("InvalidUser", "true");
-				request.getRequestDispatcher("/login.jsp").include(request, response);
-			}else{
-				loginCookie = new Cookie("patID", patient.getID() + "");
-				loginCookie.setMaxAge(60*60*24*365);
-				response.addCookie(loginCookie);
-				
-				response.sendRedirect("dashboard.jsp");
-			}
+			handlePatValidation(request, response, loginService, email, password);
+		}
+	}
+
+	private void handlePatValidation(HttpServletRequest request, HttpServletResponse response,
+			LoginService loginService, String email, String password)
+					throws ServletException, IOException {
+		Patient patient;
+		Cookie loginCookie;
+		HttpSession session = request.getSession();
+		patient = new Patient("", "", email, password);
+		patient = loginService.LoginPatient(patient);
+
+		session.setAttribute("patient", patient);
+
+		System.out.println("patient.getID() " + patient.getID());
+
+		if(patient.getID()==0){
+			request.setAttribute("InvalidUser", "true");
+			request.getRequestDispatcher("/login.jsp").include(request, response);
+		}else{
+			loginCookie = new Cookie("patID", patient.getID() + "");
+			loginCookie.setMaxAge(60*60*24*365);
+			response.addCookie(loginCookie);
+			response.sendRedirect("dashboard.jsp");
+		}
+	}
+
+	private void handleDocValidation(HttpServletRequest request, HttpServletResponse response,
+			LoginService loginService, String email, String password)
+					throws ServletException, IOException {
+		Doctor doctor;
+		Cookie loginCookie;
+		HttpSession session = request.getSession();
+		System.out.println("In Doc Login");
+		doctor = new Doctor("", "", email, password);
+		doctor = loginService.LoginDoctor(doctor);
+
+		session.setAttribute("doctor", doctor);
+
+		System.out.println("doctor.getID() " + doctor.getID());
+
+		if(doctor.getID()==0){
+			request.setAttribute("InvalidUser", true);
+			request.getRequestDispatcher("/login.jsp").include(request, response);
+		}else{
+			loginCookie = new Cookie("docID", doctor.getID() + "");
+			loginCookie.setMaxAge(60*60*24*365);
+			response.addCookie(loginCookie);
+
+			response.sendRedirect("dashboard.jsp");
 		}
 	}
 }
