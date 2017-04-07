@@ -10,7 +10,19 @@ public class RegisterService {
 	public boolean registerPatient(Patient patient) {
 		
 		PatientDAO patientDAO = new PatientDAO();
-		patientDAO.addPatient(patient);
+		Patient patientfromDB;
+		
+		//check if user already exists
+		
+		patientfromDB = patientDAO.getPatientByEmail(patient);
+		
+		System.out.println("patient.getEmail " + patientfromDB.getEmail());
+		
+		if(patientfromDB.getEmail()==null){
+			patientDAO.addPatient(patient);
+		}else{
+			return false;
+		}
 		
 		return true;
 	}

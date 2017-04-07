@@ -39,7 +39,7 @@ public class PatientDAO {
 	public Patient validatePatient(Patient patient){
 		
 		String sql = "select * from patient where email = ? and password = ?";
-		
+		Patient patientfromDB = new Patient();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, patient.getEmail());
@@ -50,10 +50,10 @@ public class PatientDAO {
 			//System.out.println("ResultSet Next : " + resultSet.next());
 			
 			while(resultSet.next()) {
-                patient.setID(resultSet.getInt("id"));
-                patient.setfName(resultSet.getString("fname"));
-                patient.setlName(resultSet.getString("lname"));
-                patient.setEmail(resultSet.getString("email"));               
+				patientfromDB.setID(resultSet.getInt("id"));
+				patientfromDB.setfName(resultSet.getString("fname"));
+				patientfromDB.setlName(resultSet.getString("lname"));
+				patientfromDB.setEmail(resultSet.getString("email"));               
             }
             resultSet.close();
             preparedStatement.close();
@@ -63,7 +63,35 @@ public class PatientDAO {
 			e.printStackTrace();
 		}
 		
-		return patient;
+		return patientfromDB;
+	}
+public Patient getPatientByEmail(Patient patient){
+		
+		String sql = "select * from patient where email = ?";
+		Patient patientfromDB = new Patient();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, patient.getEmail());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			//System.out.println("ResultSet Next : " + resultSet.next());
+			
+			while(resultSet.next()) {
+				patientfromDB.setID(resultSet.getInt("id"));
+				patientfromDB.setfName(resultSet.getString("fname"));
+				patientfromDB.setlName(resultSet.getString("lname"));
+				patientfromDB.setEmail(resultSet.getString("email"));               
+            }
+            resultSet.close();
+            preparedStatement.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return patientfromDB;
 	}
 	public void updatePatient(){}
 	public void getAllPatients(){}

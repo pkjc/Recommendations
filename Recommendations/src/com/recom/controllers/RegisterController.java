@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.recom.model.Doctor;
 import com.recom.model.Patient;
@@ -35,6 +36,8 @@ public class RegisterController extends HttpServlet {
 		RegisterService registerService = new RegisterService();
 		Patient patient;
 		Doctor doctor;
+		boolean isRegSuccessful;
+		HttpSession session = request.getSession();
 		
 		String fName = request.getParameter("fName");
 		String lName = request.getParameter("lName");
@@ -49,10 +52,17 @@ public class RegisterController extends HttpServlet {
 		}else{
 			System.out.println("You Entered : "+ fName + " " + lName + " " + email + " " + password);
 			patient = new Patient(fName, lName, email, password);
-			registerService.registerPatient(patient);
+			isRegSuccessful = registerService.registerPatient(patient);
+			request.setAttribute("isRegSuccessful", isRegSuccessful);
+			if(!isRegSuccessful){
+				request.getRequestDispatcher("/register.jsp").forward(request, response);
+			}else{
+				//response.sendRedirect("login.jsp");
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}
 		}
-		request.setAttribute("newReg", request.getParameter("newReg"));
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
-		requestDispatcher.forward(request, response);
+		//request.setAttribute("newReg", request.getParameter("newReg"));
+		//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+		//requestDispatcher.forward(request, response);
 	}
 }

@@ -50,6 +50,7 @@ public class LoginController extends HttpServlet {
 			System.out.println("In Doc Login");
 			doctor = new Doctor("", "", email, password);
 			doctor = loginService.LoginDoctor(doctor);
+			
 			session.setAttribute("doctor", doctor);
 			
 			System.out.println("doctor.getID() " + doctor.getID());
@@ -61,12 +62,13 @@ public class LoginController extends HttpServlet {
 				loginCookie = new Cookie("docID", doctor.getID() + "");
 				loginCookie.setMaxAge(60*60*24*365);
 				response.addCookie(loginCookie);
-				//request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				
 				response.sendRedirect("dashboard.jsp");
 			}
 		}else{
 			patient = new Patient("", "", email, password);
 			patient = loginService.LoginPatient(patient);
+			
 			session.setAttribute("patient", patient);
 			
 			System.out.println("patient.getID() " + patient.getID());
@@ -78,7 +80,7 @@ public class LoginController extends HttpServlet {
 				loginCookie = new Cookie("patID", patient.getID() + "");
 				loginCookie.setMaxAge(60*60*24*365);
 				response.addCookie(loginCookie);
-				//request.getRequestDispatcher("/dashboard.jsp").include(request, response);
+				
 				response.sendRedirect("dashboard.jsp");
 			}
 		}

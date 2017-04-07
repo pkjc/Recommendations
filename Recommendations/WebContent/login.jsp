@@ -25,6 +25,12 @@
 						Please login to continue.
 					</div>
 				</c:if>
+				<c:if test="${isRegSuccessful && not empty isRegSuccessful}">
+					<div class="alert alert-info" role="alert">
+						Registration Successful!
+						<c:out value="${isRegSuccessful}"></c:out>
+					</div>
+				</c:if>
 				<h1>Login</h1>
 
 				<form class="form-horizontal" action="login" method="post">

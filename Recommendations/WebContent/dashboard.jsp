@@ -35,6 +35,8 @@
 					</c:if>
 					<c:if test="${not empty doctor.fName}">
 						<c:out value="${doctor.fName}" />
+						<c:out value="${doctor.email}" />
+						<c:out value="${doctor.password}" />
 					</c:if>
 				</h1>
 			</div>

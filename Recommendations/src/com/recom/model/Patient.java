@@ -15,6 +15,11 @@ public class Patient {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public Patient() {
+		super();
+	}
+
 	public int getID() {
 		return ID;
 	}
