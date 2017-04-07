@@ -15,6 +15,10 @@ public class Doctor {
 		this.password = password;
 	}
 	
+	public Doctor() {
+		super();
+	}
+	
 	public int getID() {
 		return ID;
 	}

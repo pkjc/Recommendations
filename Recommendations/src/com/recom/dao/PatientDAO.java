@@ -35,64 +35,62 @@ public class PatientDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Patient validatePatient(Patient patient){
-		
+
 		String sql = "select * from patient where email = ? and password = ?";
 		Patient patientfromDB = new Patient();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, patient.getEmail());
 			preparedStatement.setString(2, patient.getPassword());
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			//System.out.println("ResultSet Next : " + resultSet.next());
-			
+
 			while(resultSet.next()) {
 				patientfromDB.setID(resultSet.getInt("id"));
 				patientfromDB.setfName(resultSet.getString("fname"));
 				patientfromDB.setlName(resultSet.getString("lname"));
 				patientfromDB.setEmail(resultSet.getString("email"));               
-            }
-            resultSet.close();
-            preparedStatement.close();
-			
+			}
+			resultSet.close();
+			preparedStatement.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return patientfromDB;
 	}
-public Patient getPatientByEmail(Patient patient){
-		
+	
+	public Patient getPatientByEmail(Patient patient){
+
 		String sql = "select * from patient where email = ?";
 		Patient patientfromDB = new Patient();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, patient.getEmail());
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			//System.out.println("ResultSet Next : " + resultSet.next());
-			
+
 			while(resultSet.next()) {
 				patientfromDB.setID(resultSet.getInt("id"));
 				patientfromDB.setfName(resultSet.getString("fname"));
 				patientfromDB.setlName(resultSet.getString("lname"));
 				patientfromDB.setEmail(resultSet.getString("email"));               
-            }
-            resultSet.close();
-            preparedStatement.close();
-			
+			}
+			resultSet.close();
+			preparedStatement.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return patientfromDB;
 	}
+	
 	public void updatePatient(){}
 	public void getAllPatients(){}
 	public void getPatientByID(){}

@@ -15,9 +15,12 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<c:if test="${not empty patient.fName || not empty doctor.fName}">
+					<li><a href="dashboard.jsp">Dashboard</a></li>
+					<li><a href="start-test">Start Test</a></li>
+					<li><a href="tests">All Tests</a></li>
+					<li><a href="appointments">All Appointments</a></li>
+				</c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${empty patient.fName && empty doctor.fName}">

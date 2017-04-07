@@ -34,10 +34,18 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		RegisterService registerService = new RegisterService();
+		boolean isRegSuccessful = false;
+		
+		isRegSuccessful = handleRegistration(request, registerService);
+		
+		handleRedirection(request, response, isRegSuccessful);
+	}
+
+	//Passes info to model to complete business logic
+	private boolean handleRegistration(HttpServletRequest request, RegisterService registerService) {
 		Patient patient;
 		Doctor doctor;
 		boolean isRegSuccessful;
-		HttpSession session = request.getSession();
 		
 		String fName = request.getParameter("fName");
 		String lName = request.getParameter("lName");
@@ -48,21 +56,23 @@ public class RegisterController extends HttpServlet {
 		if(isDoctor != null && !isDoctor.isEmpty()){
 			System.out.println();
 			doctor = new Doctor(fName, lName, email, password);
-			registerService.registerDoctor(doctor);
+			isRegSuccessful = registerService.registerDoctor(doctor);
 		}else{
 			System.out.println("You Entered : "+ fName + " " + lName + " " + email + " " + password);
 			patient = new Patient(fName, lName, email, password);
 			isRegSuccessful = registerService.registerPatient(patient);
-			request.setAttribute("isRegSuccessful", isRegSuccessful);
-			if(!isRegSuccessful){
-				request.getRequestDispatcher("/register.jsp").forward(request, response);
-			}else{
-				//response.sendRedirect("login.jsp");
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
-			}
 		}
-		//request.setAttribute("newReg", request.getParameter("newReg"));
-		//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
-		//requestDispatcher.forward(request, response);
+		return isRegSuccessful;
+	}
+	
+	//Redirects user after registration is successful or failed
+	private void handleRedirection(HttpServletRequest request, HttpServletResponse response, boolean isRegSuccessful)
+			throws ServletException, IOException {
+		request.setAttribute("isRegSuccessful", isRegSuccessful);
+		if(!isRegSuccessful){
+			request.getRequestDispatcher("/register.jsp").forward(request, response);
+		}else{
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
 	}
 }

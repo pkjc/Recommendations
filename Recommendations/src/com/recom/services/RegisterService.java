@@ -13,25 +13,32 @@ public class RegisterService {
 		Patient patientfromDB;
 		
 		//check if user already exists
-		
 		patientfromDB = patientDAO.getPatientByEmail(patient);
 		
 		System.out.println("patient.getEmail " + patientfromDB.getEmail());
 		
 		if(patientfromDB.getEmail()==null){
 			patientDAO.addPatient(patient);
+			return true;
 		}else{
 			return false;
 		}
-		
-		return true;
 	}
+	
 	public boolean registerDoctor(Doctor doctor) {
-		
 		DoctorDAO doctorDAO = new DoctorDAO();
-		doctorDAO.addDoctor(doctor);
+		Doctor doctorfromDB;
 		
-		return true;
+		//check if user already exists
+		doctorfromDB = doctorDAO.getDoctorByEmail(doctor);
+		
+		System.out.println("doctor.getEmail " + doctorfromDB.getEmail());
+		
+		if(doctorfromDB.getEmail()==null){
+			doctorDAO.addDoctor(doctor);
+			return true;
+		}else{
+			return false;
+		}
 	}
-
 }
