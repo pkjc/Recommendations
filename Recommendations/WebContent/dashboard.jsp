@@ -13,7 +13,7 @@
 	if (cookieFound) {
 		//cookie was found so do nothing and let the user see his dashboard
 	} else {
-		session.setAttribute("PlsLogin", true);
+		session.setAttribute("plsLogin", true);
 		response.sendRedirect("login.jsp");
 	}
 %>
@@ -58,7 +58,7 @@
 					</tbody>
 				</table>
 				
-				<h4>Latest Appointments</h4>
+				<h4>Upcoming Appointments</h4>
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>

@@ -32,9 +32,10 @@
 						successfully logged out.</div>
 					<c:remove var="logout" scope="session" />
 				</c:if>
-				<c:if test="${PlsLogin}">
+				<c:if test="${plsLogin}">
 					<div class="alert alert-warning" role="alert">Please login to
 						continue.</div>
+					<c:remove var="plsLogin" scope="session" />
 				</c:if>
 				<c:if test="${isRegSuccessful && not empty isRegSuccessful}">
 					<div class="alert alert-info" role="alert">
