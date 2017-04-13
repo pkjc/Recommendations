@@ -94,6 +94,7 @@ public class DoctorDAO {
 	}
 
 	public void updateDcotor(){}
+	
 	public List<Doctor> getAllDoctors(){
 		String sql = "select * from doctor";
 		List<Doctor> doctorsFromDB = new ArrayList<>();
