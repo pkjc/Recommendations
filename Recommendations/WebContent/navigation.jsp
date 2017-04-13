@@ -16,7 +16,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<c:if test="${not empty patient.fName || not empty doctor.fName}">
+				<c:if test="${loggedIn}">
 					<li><a href="dashboard.jsp">Dashboard</a></li>
 					<li><a href="start-test">Start Test</a></li>
 					<li><a href="tests">All Tests</a></li>

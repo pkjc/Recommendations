@@ -10,9 +10,13 @@ public class CookieChecker {
 		
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if ((cookie.getName().equals("patID")) || (cookie.getName().equals("docID"))) {
-					System.out.println("found cookie \n");
+				if (cookie.getName().equals("patID")) {
 					cookieFound = true;
+					request.setAttribute("patID", cookie.getValue());
+					break;
+				}else if(cookie.getName().equals("docID")){
+					cookieFound = true;
+					request.setAttribute("docID", cookie.getValue());
 					break;
 				}
 			}
