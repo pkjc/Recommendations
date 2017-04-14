@@ -12,11 +12,11 @@ public class CookieChecker {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("patID")) {
 					cookieFound = true;
-					request.setAttribute("patID", cookie.getValue());
+					request.getSession().setAttribute("patID", cookie.getValue());
 					break;
 				}else if(cookie.getName().equals("docID")){
 					cookieFound = true;
-					request.setAttribute("docID", cookie.getValue());
+					request.getSession().setAttribute("docID", cookie.getValue());
 					break;
 				}
 			}

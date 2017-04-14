@@ -93,6 +93,31 @@ public class PatientDAO {
 	
 	public void updatePatient(){}
 	public void getAllPatients(){}
-	public void getPatientByID(){}
+	
+	public Patient getPatientByID(int patID){
+		String sql = "select * from patient where id = ?";
+		Patient patientfromDB = new Patient();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, patID);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				patientfromDB.setID(resultSet.getInt("id"));
+				patientfromDB.setfName(resultSet.getString("fname"));
+				patientfromDB.setlName(resultSet.getString("lname"));
+				patientfromDB.setEmail(resultSet.getString("email"));               
+			}
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return patientfromDB;
+	}
 	public void deletePatient(){}
 }

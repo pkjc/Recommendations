@@ -11,7 +11,15 @@
 	boolean cookieFound = new CookieChecker().checkCookie(request);
 	System.out.println("#### dash \n" + cookieFound);
 	if (cookieFound) {
-		//cookie was found so do nothing and let the user see his dashboard
+		if(request.getSession().getAttribute("patID") != null){
+			if(request.getAttribute("patient") == null){
+				response.sendRedirect("login?patID=" + request.getSession().getAttribute("patID"));
+			}
+		}else if(request.getSession().getAttribute("docID") != null){
+			if(request.getAttribute("doctor") == null){
+				response.sendRedirect("login?docID=" + request.getSession().getAttribute("docID"));		
+			}
+		}
 	} else {
 		session.setAttribute("plsLogin", true);
 		response.sendRedirect("login.jsp");

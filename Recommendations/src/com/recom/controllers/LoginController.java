@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.recom.dao.DoctorDAO;
+import com.recom.dao.PatientDAO;
 import com.recom.model.Doctor;
 import com.recom.model.Patient;
 import com.recom.services.LoginService;
@@ -29,7 +30,26 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		response.sendRedirect("login.jsp");
+		if(request.getParameter("patID") != null){
+			System.out.println("IN doGet");
+			PatientDAO patDAO = new PatientDAO();
+			Patient patient = new Patient();
+			patient = patDAO.getPatientByID(Integer.parseInt(request.getParameter("patID")));
+			
+			request.setAttribute("patient", patient);
+			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+			
+		}else if(request.getParameter("docID") != null){
+			DoctorDAO docDAO = new DoctorDAO();
+			Doctor doctor = new Doctor();
+			doctor = docDAO.getDoctorByID(Integer.parseInt(request.getParameter("docID")));
+			
+			request.setAttribute("doctor", doctor);
+			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+			
+		}else{
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 	/**

@@ -122,6 +122,31 @@ public class DoctorDAO {
 
 		return doctorsFromDB;
 	}
-	public void getDoctorByID(){}
+	public Doctor getDoctorByID(int docID){
+		String sql = "select * from doctor where id = ?";
+		Doctor doctorFromDB = new Doctor();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, docID);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				doctorFromDB.setID(resultSet.getInt("id"));
+				doctorFromDB.setfName(resultSet.getString("fname"));
+				doctorFromDB.setlName(resultSet.getString("lname"));
+				doctorFromDB.setEmail(resultSet.getString("email"));               
+			}
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return doctorFromDB;
+	}
 	public void deleteDoctor(){}
 }
