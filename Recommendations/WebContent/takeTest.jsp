@@ -37,52 +37,12 @@
 					</div>
 				</c:if>
 				<h1>
-					Hello,
-					<c:if test="${not empty patient.fName}">
-						<c:out value="${patient.fName}" />
-					</c:if>
-					<c:if test="${not empty doctor.fName}">
-						<c:out value="${doctor.fName}" />
-					</c:if>
+					Start Test
 				</h1>
 				<hr>
-				<h4>Recent Tests</h4>
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Date</th>
-							<th>Results</th>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach var="doc" items="${docList}">
-						<tr>
-							<th scope="row">${doc.ID}</th>
-							<td>${doc.fName}</td>
-							<td>${doc.lName}</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-				<br>
-				<hr/>
-				<h4>Upcoming Appointments</h4>
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Doctor</th>
-							<th>Appointment Date</th>
-							<th>Booked On</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							
-						</tr>
-					</tbody>
-				</table>
+				
+				
+				
 			</div>
 			<div class="col-md-2"></div>
 		</div>
