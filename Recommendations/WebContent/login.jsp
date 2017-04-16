@@ -9,9 +9,7 @@
 <body>
 	<%
 		boolean cookieFound = new CookieChecker().checkCookie(request);
-		System.out.println("#### login \n" + cookieFound);
 		if (cookieFound) {
-			System.out.println("#### 3 \n");
 			request.setAttribute("loggedIn", true);
 			request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 		} else {

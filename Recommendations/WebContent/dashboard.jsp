@@ -9,7 +9,6 @@
 <body>
 <%
 	boolean cookieFound = new CookieChecker().checkCookie(request);
-	System.out.println("#### dash \n" + cookieFound);
 	if (cookieFound) {
 		if(request.getSession().getAttribute("patID") != null){
 			if(request.getAttribute("patient") == null){
