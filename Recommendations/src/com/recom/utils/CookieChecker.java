@@ -13,10 +13,12 @@ public class CookieChecker {
 				if (cookie.getName().equals("patID")) {
 					cookieFound = true;
 					request.getSession().setAttribute("patID", cookie.getValue());
+					request.setAttribute("loggedIn", true);
 					break;
 				}else if(cookie.getName().equals("docID")){
 					cookieFound = true;
 					request.getSession().setAttribute("docID", cookie.getValue());
+					request.setAttribute("loggedIn", true);
 					break;
 				}
 			}

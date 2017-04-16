@@ -11,11 +11,12 @@
 	boolean cookieFound = new CookieChecker().checkCookie(request);
 	if (cookieFound) {
 		if(request.getSession().getAttribute("patID") != null){
-			if(request.getAttribute("patient") == null){
+			if(request.getSession().getAttribute("patient") == null){
+				System.out.println("pat is : " + request.getSession().getAttribute("patient"));
 				response.sendRedirect("login?patID=" + request.getSession().getAttribute("patID"));
 			}
 		}else if(request.getSession().getAttribute("docID") != null){
-			if(request.getAttribute("doctor") == null){
+			if(request.getSession().getAttribute("doctor") == null){
 				response.sendRedirect("login?docID=" + request.getSession().getAttribute("docID"));		
 			}
 		}
@@ -29,12 +30,6 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="">
-				<c:if test="${loggedIn}">
-					<div class="alert alert-info alert-dismissable" role="alert">
-						You're already logged in.
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					</div>
-				</c:if>
 				<h1>
 					Hello,
 					<c:if test="${not empty patient.fName}">

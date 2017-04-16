@@ -31,12 +31,11 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		if(request.getParameter("patID") != null){
-			System.out.println("IN doGet");
 			PatientDAO patDAO = new PatientDAO();
 			Patient patient = new Patient();
 			patient = patDAO.getPatientByID(Integer.parseInt(request.getParameter("patID")));
 			
-			request.setAttribute("patient", patient);
+			request.getSession().setAttribute("patient", patient);
 			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 			
 		}else if(request.getParameter("docID") != null){
@@ -44,8 +43,16 @@ public class LoginController extends HttpServlet {
 			Doctor doctor = new Doctor();
 			doctor = docDAO.getDoctorByID(Integer.parseInt(request.getParameter("docID")));
 			
-			request.setAttribute("doctor", doctor);
+			request.getSession().setAttribute("doctor", doctor);
 			request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
+			
+		}else if(request.getParameter("startTest") != null){
+			PatientDAO patDAO = new PatientDAO();
+			Patient patient = new Patient();
+			patient = patDAO.getPatientByID(Integer.parseInt(request.getParameter("patID")));
+			
+			request.getSession().setAttribute("patient", patient);
+			request.getRequestDispatcher("/takeTest.jsp").forward(request, response);
 			
 		}else{
 			response.sendRedirect("login.jsp");
@@ -78,9 +85,7 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		patient = new Patient("", "", email, password);
 		patient = loginService.LoginPatient(patient);
-
-		session.setAttribute("patient", patient);
-
+		
 		System.out.println("patient.getID() " + patient.getID());
 
 		if(patient.getID()==0){
@@ -90,6 +95,8 @@ public class LoginController extends HttpServlet {
 			loginCookie = new Cookie("patID", patient.getID() + "");
 			loginCookie.setMaxAge(60*60*24*365);
 			response.addCookie(loginCookie);
+			session.setAttribute("patient", patient);
+			request.setAttribute("loggedIn", true);
 			response.sendRedirect("dashboard.jsp");
 		}
 	}
@@ -104,8 +111,6 @@ public class LoginController extends HttpServlet {
 		doctor = new Doctor("", "", email, password);
 		doctor = loginService.LoginDoctor(doctor);
 
-		session.setAttribute("doctor", doctor);
-
 		System.out.println("doctor.getID() " + doctor.getID());
 
 		if(doctor.getID()==0){
@@ -115,7 +120,8 @@ public class LoginController extends HttpServlet {
 			loginCookie = new Cookie("docID", doctor.getID() + "");
 			loginCookie.setMaxAge(60*60*24*365);
 			response.addCookie(loginCookie);
-
+			session.setAttribute("doctor", doctor);
+			request.setAttribute("loggedIn", true);
 			response.sendRedirect("dashboard.jsp");
 		}
 	}

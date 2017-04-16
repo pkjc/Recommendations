@@ -18,9 +18,11 @@
 			<ul class="nav navbar-nav">
 				<c:if test="${loggedIn}">
 					<li><a href="dashboard.jsp">Dashboard</a></li>
-					<li><a href="start-test">Start Test</a></li>
-					<li><a href="tests">All Tests</a></li>
-					<li><a href="appointments">All Appointments</a></li>
+					<c:if test="${not empty patient.fName}">
+						<li><a href="take-test">Start Test</a></li>
+						<li><a href="tests">All Tests</a></li>
+						<li><a href="appointments">All Appointments</a></li>
+					</c:if>
 				</c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

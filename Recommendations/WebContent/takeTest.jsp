@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="com.recom.utils.CookieChecker" %>
+<%@ page import="com.recom.utils.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
 <body>
-<%
+	<%
 	boolean cookieFound = new CookieChecker().checkCookie(request);
-	System.out.println("#### dash \n" + cookieFound);
 	if (cookieFound) {
 		if(request.getSession().getAttribute("patID") != null){
-			if(request.getAttribute("patient") == null){
-				response.sendRedirect("login?patID=" + request.getSession().getAttribute("patID"));
+			if(request.getSession().getAttribute("patient") == null){
+				System.out.println("pat is : " + request.getSession().getAttribute("patient"));
+				response.sendRedirect("login?startTest=" + request.getSession().getAttribute("patID"));
 			}
 		}else if(request.getSession().getAttribute("docID") != null){
-			if(request.getAttribute("doctor") == null){
+			if(request.getSession().getAttribute("doctor") == null){
 				response.sendRedirect("login?docID=" + request.getSession().getAttribute("docID"));		
 			}
 		}
@@ -30,19 +30,33 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="">
-				<c:if test="${loggedIn}">
-					<div class="alert alert-info alert-dismissable" role="alert">
-						You're already logged in.
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					</div>
-				</c:if>
-				<h1>
-					Start Test
-				</h1>
+				<h1>Start Test <c:out value="${patient.fName}"/></h1>
 				<hr>
-				
-				
-				
+				<form class="form-horizontal" id="form" action="takeTest" method="post">
+					<div class="form-group">
+						<label for="" class="col-md-3 control-label"> <c:out
+								value="${questionsList[0].questionText}" />
+						</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" id="q1" name="q1"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="col-md-3 control-label"> <c:out
+								value="${questionsList[1].questionText}" />
+						</label>
+						<div class="col-md-9">
+							<input type="checkbox" class="form-control" id="q2" name="q2"
+								placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-md-12">
+							<button type="submit" class="btn btn-info">Submit</button>
+						</div>
+					</div>
+				</form>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

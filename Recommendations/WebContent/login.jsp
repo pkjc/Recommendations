@@ -10,7 +10,6 @@
 	<%
 		boolean cookieFound = new CookieChecker().checkCookie(request);
 		if (cookieFound) {
-			request.setAttribute("loggedIn", true);
 			request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 		} else {
 			//cookie not found so do nothing and let the user log into his account
