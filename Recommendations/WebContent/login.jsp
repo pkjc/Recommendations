@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.recom.utils.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@
 <jsp:include page="head.jsp" />
 <body>
 	<%
-		/* boolean cookieFound = new CookieChecker().checkCookie(request);
+		boolean cookieFound = new CookieChecker().checkCookie(request);
 		System.out.println("#### login \n" + cookieFound);
 		if (cookieFound) {
 			System.out.println("#### 3 \n");
@@ -15,7 +16,7 @@
 			request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 		} else {
 			//cookie not found so do nothing and let the user log into his account
-		} */
+		}
 	%>
 	<jsp:include page="navigation.jsp" />
 	<div class="container">
