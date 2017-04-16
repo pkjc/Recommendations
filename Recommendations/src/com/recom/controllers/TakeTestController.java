@@ -36,6 +36,9 @@ public class TakeTestController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		TakeTestService takeTestService = new TakeTestService();
+		String testResult = takeTestService.evalTest();
 		
+		response.getWriter().write("You are : " + request.getParameter("q1") + " " + request.getParameter("q2"));
 	}
 }

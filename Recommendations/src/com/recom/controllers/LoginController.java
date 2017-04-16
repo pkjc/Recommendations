@@ -49,10 +49,10 @@ public class LoginController extends HttpServlet {
 		}else if(request.getParameter("startTest") != null){
 			PatientDAO patDAO = new PatientDAO();
 			Patient patient = new Patient();
-			patient = patDAO.getPatientByID(Integer.parseInt(request.getParameter("patID")));
+			patient = patDAO.getPatientByID(Integer.parseInt(request.getParameter("startTest")));
 			
 			request.getSession().setAttribute("patient", patient);
-			request.getRequestDispatcher("/takeTest.jsp").forward(request, response);
+			request.getRequestDispatcher("/take-test").forward(request, response);
 			
 		}else{
 			response.sendRedirect("login.jsp");

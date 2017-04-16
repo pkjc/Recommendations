@@ -13,4 +13,9 @@ public class TakeTestService {
 		return qList;
 	}
 
+	public String evalTest() {
+		
+		return null;
+	}
+
 }
