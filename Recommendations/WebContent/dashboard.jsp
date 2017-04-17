@@ -31,12 +31,6 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="">
-				<c:if test="${loggedIn}">
-					<div class="alert alert-info alert-dismissable" role="alert">
-						You're already logged in.
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					</div>
-				</c:if>
 				<h1>
 					Hello,
 					<c:if test="${not empty patient.fName}">
