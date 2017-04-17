@@ -30,11 +30,20 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="">
-				<h1>
-					Your test result:
-				</h1>
-				<hr>
-				<p></p>
+				<c:if test="${testPositive}">
+					<div class="bs-callout bs-callout-danger"
+						id="callout-btndropdown-dependency">
+						<h4>Your test result:</h4>
+						<p style="font-size:30px">${testResult}</p>
+					</div>
+				</c:if>
+				<c:if test="${not testPositive}">
+					<div class="bs-callout bs-callout-info"
+						id="callout-btndropdown-dependency">
+						<h4>Your test result:</h4>
+						<p style="font-size:30px">${testResult}</p>
+					</div>
+				</c:if>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -45,6 +54,7 @@
 	<script src="./assets/jquery.min.js"></script>
 	<script src="./assets/bootstrap.min.js"></script>
 	<script>
+		
 	</script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="./assets/ie10-viewport-bug-workaround.js"></script>

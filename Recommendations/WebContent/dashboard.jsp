@@ -1,11 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="com.recom.utils.*" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp" />
 <body>
+
+<%
+	boolean cookieFound = new CookieChecker().checkCookie(request);
+	if (cookieFound) {
+		if(request.getSession().getAttribute("patID") != null){
+			if(request.getSession().getAttribute("patient") == null){
+				System.out.println("pat is : " + request.getSession().getAttribute("patient"));
+				response.sendRedirect("login?patID=" + request.getSession().getAttribute("patID"));
+			}
+		}else if(request.getSession().getAttribute("docID") != null){
+			if(request.getSession().getAttribute("doctor") == null){
+				response.sendRedirect("login?docID=" + request.getSession().getAttribute("docID"));		
+			}
+		}
+	} else {
+		session.setAttribute("plsLogin", true);
+		response.sendRedirect("login.jsp");
+	}
+%>
 
 	<jsp:include page="navigation.jsp" />
 	<div class="container">

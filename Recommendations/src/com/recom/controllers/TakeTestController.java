@@ -48,9 +48,16 @@ public class TakeTestController extends HttpServlet {
 		answersList.add(request.getParameter("q7"));
 		answersList.add(request.getParameter("q8"));
 		answersList.add(request.getParameter("q9"));
+		answersList.add(request.getParameter("q9a"));
 		answersList.add(request.getParameter("q10"));
 		
 		String testResult = takeTestService.evalTest(answersList);
+		System.out.println("testResult.equals(You should get screened for breast cancer) " + testResult.equals("You should get screened for breast cancer."));
+		if(testResult.equals("You should get screened for lung cancer.") || testResult.equals("You should get screened for breast cancer.")){
+			request.setAttribute("testPositive", true);
+		}else{
+			request.setAttribute("testPositive", false);
+		}
 		
 		request.setAttribute("testResult", testResult);
 		request.getRequestDispatcher("/takeResult.jsp").forward(request, response);
