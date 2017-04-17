@@ -23,9 +23,16 @@
         <table border="0">
             <thead>
                 <tr>
-                    <th>Your information has been submitted. </th>
+                    <th>Your information has been submitted. 
+                    <form action="dashboard.jsp">
+							<input type="submit" value="Dashboard"
+                         /> 
+                        </form>
+                    </th>
+                        
                 </tr>
             </thead>
+
             
 
             

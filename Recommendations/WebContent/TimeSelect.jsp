@@ -19,52 +19,29 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     </div>
                 </c:if>
- <h1>Available Times</h1>
-        <table border="0">
-            <thead>
-                <tr>
-                    <th>Please Schedule your times. </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Please Select from Available Times.</td>
-                </tr>
-  <tr>
-                    <td><form action="Confirmation.jsp">
-                   <strong>Pick the days available:</strong>
-                   
-                   <input type="checkbox" name="Day" value="0" checked="checked" />
-                       <option>Monday</option>
-                   <input type="checkbox" name="Day" value="1" checked="checked" />
-                       <option>Tuesday</option>
-                   <input type="checkbox" name="Day" value="2" checked="checked" />
-                       <option>Wednesday</option>
-                   
-                    
-                   
-                        </form></td>
-                        
-  </tr>
-                
-                <tr><td>  <form action="Confirmation.jsp">
-                            <strong>Pick the time available:</strong>
-                   <input type="checkbox" name="Time" value="0" checked="checked" />
-                       <option>8am-9am</option>
-                   <input type="checkbox" name="Time" value="1" checked="checked" />
-                       <option>9am-10am</option>
-                   <input type="checkbox" name="Time" value="2" checked="checked" />
-                       <option>10am-11am</option>
-                   <input type="checkbox" name="Time" value="3" checked="checked" />
-                       <option>11am-12pm</option>
-                   <input type="checkbox" name="Time" value="4" checked="checked" />
-                       <option>12pm-1pm</option>
-                  
-                      
-                        <tr><td><input type="submit" value="Submit"
+ <h1>Select a Date and time</h1>
+<sql:setDataSource
+        var="myDS"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/testdb"
+        user="root" password="cse337project"
+    />
+     
+    <sql:query var="listAvail"   dataSource="${myDS}">
+        SELECT * FROM avail;
+    </sql:query>
+    
+    <div align="center">
+    <select name="Avails">
+    <c:forEach var="avail" items="${listAvail.rows}">
+    <option value="${avail.ID}"> ${avail.days} ${avail.times}</option>
+	</c:forEach>
+	</select>
+	<form action="Confirmation.jsp">
+<input type="submit" value="Submit"
                          /> 
-                    </td></tr>    
-                        </form></td></tr>
+                        </form>
+	 </div>
 
             </div>
             <div class="col-md-2"></div>

@@ -20,49 +20,27 @@
                     </div>
                 </c:if>
  <h1>Available Doctors</h1>
-        <table border="0">
-            <thead>
-                <tr>
-                    <th>Please pick the doctor you want. </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Please Select your Available Doctors.</td>
-                </tr>
-  <tr>
-                    <td></td>
-                    <td><form action="TimeSelect.jsp">
-                   
-                   
-                  
-                       <option>Doctor John Doe</option>
-                       <input type="submit" value="Select" />
-                   
-                        </form></td>
-                        <td></td>
-                        <td><form action="TimeSelect2.jsp">
-                   
-                   
-                   
-                       <option>Doctor Bob Jones</option>
-                       <input type="submit" value="Select" />
-                   
-                        </form></td>
-                        <td></td>
-                         <td><form action="TimeSelect3.jsp">
-                   
-                  
-                   
-                       <option>Doctor Dave Holms</option>
-                       <input type="submit" value="Select" />
-                   
-                        </form></td>
-                        
-  </tr>
-                
-                
-
+ <sql:setDataSource
+        var="myDS"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/testdb"
+        user="root" password="cse337project"
+    />
+     
+    <sql:query var="listDoctors"   dataSource="${myDS}">
+        SELECT * FROM doctor;
+    </sql:query>
+    <div align="center">
+    <select name="Doctors">
+    <c:forEach var="doctor" items="${listDoctors.rows}">
+    <option value="${doctor.ID}"> ${doctor.fname} ${doctor.lname} </option>
+	</c:forEach>
+	</select>
+	<form action="TimeSelect.jsp">
+<input type="submit" value="Submit"
+                         /> 
+                        </form>
+	 </div>
             </div>
             <div class="col-md-2"></div>
         </div>
