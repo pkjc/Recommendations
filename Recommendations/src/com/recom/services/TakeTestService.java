@@ -13,9 +13,29 @@ public class TakeTestService {
 		return qList;
 	}
 
-	public String evalTest() {
+	public String evalTest(List<String> answersList) {
+		String testResult = "";
+		String answer1 = answersList.get(0);
+	
+		switch(answer1) {
 		
-		return null;
+		case "M" :
+			
+			System.out.println("M");
+			
+			break;
+			
+		case "F" :
+			
+			System.out.println("F");
+			
+			break;
+			
+		default :
+			System.out.println("Invalid");
+		}
+
+		return testResult;
 	}
 
 }
