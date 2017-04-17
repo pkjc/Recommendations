@@ -26,7 +26,6 @@ public class TakeTestController extends HttpServlet {
 			throws ServletException, IOException {
 		TakeTestService takeTestService = new TakeTestService();
 		List<Question> questionsList = takeTestService.createTest();
-		
 		request.setAttribute("questionsList", questionsList);
 		request.getRequestDispatcher("/takeTest.jsp").forward(request, response);
 	}

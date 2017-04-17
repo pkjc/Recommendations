@@ -16,8 +16,8 @@
 					response.sendRedirect("login?startTest=" + request.getSession().getAttribute("patID"));
 				}
 			} else if (request.getSession().getAttribute("docID") != null) {
-				if (request.getSession().getAttribute("doctor") == null) {
-					response.sendRedirect("login?docID=" + request.getSession().getAttribute("docID"));
+				if (request.getSession().getAttribute("doctor") != null) {
+					response.sendRedirect("dashboard.jsp");
 				}
 			}
 		} else {
@@ -37,12 +37,27 @@
 				<hr>
 				<form class="form-horizontal" id="form" action="take-test"
 					method="post">
-					<div class="form-group">
-						<label for="" class="col-md-3 control-label"> <c:out
+					
+					<div class="form-group" id="q1block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[1].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q1" name="q1">
+								<option value="null">--------------</option>
+								<option value="M">Male</option>
+								<option value="F">Female</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q2block">
+						<label for="" class="col-md-5 control-label"> <c:out
 								value="${questionsList[0].questionText}" />
 						</label>
-						<div class="col-md-9">
-							<select class="form-control" id="q1" name="q1">
+						<div class="col-md-7">
+							<select class="form-control" id="q2" name="q2">
+								<option value="null">--------------</option>
 								<option value="20-30">20-30</option>
 								<option value="30-40">30-40</option>
 								<option value="40-60">40-60</option>
@@ -50,19 +65,129 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group" style="display: none;" id="q2block">
-						<label for="" class="col-md-3 control-label"> <c:out
-								value="${questionsList[1].questionText}" />
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[2].questionText}" />
 						</label>
-						<div class="col-md-9">
-							<select class="form-control" id="q2" name="q2">
-								<option value="M">Male</option>
-								<option value="F">Female</option>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
 							</select>
 						</div>
 					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[3].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[4].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[5].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[6].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[7].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display: ;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[8].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group" style="display:;" id="q3block">
+						<label for="" class="col-md-5 control-label"> <c:out
+								value="${questionsList[9].questionText}" />
+						</label>
+						<div class="col-md-7">
+							<select class="form-control" id="q3" name="q3">
+								<option value="null">--------------</option>
+								<option value="20-30">20-30</option>
+								<option value="30-40">30-40</option>
+								<option value="40-60">40-60</option>
+								<option value="60+">More than 60</option>
+							</select>
+						</div>
+					</div>
+					
 					<div class="form-group">
-						<div class="col-sm-offset-3 col-md-12">
+						<div class="col-sm-offset-4 col-md-8">
 							<button type="submit" class="btn btn-info">Submit</button>
 						</div>
 					</div>
@@ -80,8 +205,11 @@
 		$('#q1').on('change', function() {
 			var selection = $(this).val();
 			switch (selection) {
-			case "60+":
+			case "M":
 				$("#q2block").show()
+				break;
+			case "F":
+				$("#q3block").show()
 				break;
 			default:
 				$("#q2block").hide()

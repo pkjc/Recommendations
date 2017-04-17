@@ -21,7 +21,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8" role="navigation">
 				<c:if test="${InvalidUser}">
-					<div class="alert alert-danger" role="alert">Email or
+					<div class="alert alert-danger" role="alert">The Email or
 						Password you entered was incorrect. Please try again.</div>
 				</c:if>
 				<c:if test="${logout}">

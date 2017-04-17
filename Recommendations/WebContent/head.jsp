@@ -23,6 +23,14 @@ h4, .h4 {
 hr {
 	margin-bottom: 35px
 }
+
+.form-horizontal .control-label {
+	text-align: left;
+}
+
+.form-group {
+	margin-bottom: 25px;
+}
 </style>
 <title>Project 337</title>
 </head>
